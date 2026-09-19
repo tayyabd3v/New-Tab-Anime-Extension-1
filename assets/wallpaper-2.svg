@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs><linearGradient id="dawn" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#201943"/><stop offset=".48" stop-color="#88518a"/><stop offset="1" stop-color="#f4a36f"/></linearGradient><linearGradient id="haze" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffc9b7" stop-opacity=".6"/><stop offset="1" stop-color="#b1699c" stop-opacity="0"/></linearGradient></defs>
+  <rect width="1600" height="1000" fill="url(#dawn)"/><circle cx="390" cy="295" r="120" fill="#ffddb4" opacity=".85"/><path d="M0 530Q280 400 520 545t510 5 570-40v490H0Z" fill="url(#haze)"/>
+  <path d="M0 780q180-190 365-55t360-80q220-140 430-5t445-35v395H0Z" fill="#332044" opacity=".9"/><path d="M0 865q270-160 500-20t390-40q260-140 710 65v130H0Z" fill="#16162f"/>
+  <g fill="#ffe9df" opacity=".72"><circle cx="920" cy="130" r="3"/><circle cx="1100" cy="220" r="2"/><circle cx="1370" cy="175" r="4"/><circle cx="720" cy="290" r="3"/><circle cx="155" cy="110" r="2"/></g>
+</svg>

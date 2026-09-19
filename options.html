@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anime New Tab Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="settings-wallpaper" id="settingsWallpaper" aria-hidden="true"></div>
+  <video class="settings-live-wallpaper" id="settingsLiveWallpaper" autoplay muted loop playsinline aria-hidden="true"></video>
+  <div class="settings-scrim" aria-hidden="true"></div>
+  <main class="settings-page">
+    <header class="page-header">
+      <div>
+        <p class="kicker">ANIME NEW TAB</p>
+        <h1>Make it yours<span>.</span></h1>
+        <p class="subtitle">Tune your little corner of the web.</p>
+      </div>
+      <button class="back-link" id="closeSettings" type="button">← Back to dashboard</button>
+    </header>
+
+    <form id="settingsForm" novalidate>
+      <section class="panel">
+        <div class="panel-heading"><span class="panel-number">01</span><div><h2>Welcome home</h2><p>Personalize your greeting.</p></div></div>
+        <label class="field-label" for="name">Your name <span>optional</span></label>
+        <input class="text-input" id="name" type="text" maxlength="40" placeholder="What should we call you?" autocomplete="off">
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><span class="panel-number">02</span><div><h2>Search the universe</h2><p>Pick the engine behind your searches.</p></div></div>
+        <label class="field-label" for="engine">Preferred search engine</label>
+        <select class="text-input" id="engine">
+          <option value="google">Google</option>
+          <option value="duckduckgo">DuckDuckGo</option>
+          <option value="bing">Bing</option>
+          <option value="youtube">YouTube</option>
+          <option value="brave">Brave</option>
+        </select>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><span class="panel-number">03</span><div><h2>Set the scene</h2><p>Choose a wallpaper and how often it changes.</p></div></div>
+        <div class="wallpaper-grid" id="wallpaperGrid"></div>
+        <div class="custom-wallpapers" id="customWallpapers"></div>
+        <label class="upload-wallpaper" for="wallpaperUpload">
+          <span class="upload-icon">＋</span>
+          <span><strong>Add wallpaper or live wallpaper</strong><small>JPG, PNG, WEBP, GIF, MP4, WEBM up to 50 MB</small></span>
+        </label>
+        <input id="wallpaperUpload" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm" hidden>
+        <div class="mode-row">
+          <label class="field-label" for="wallpaperMode">Wallpaper mode</label>
+          <select class="text-input compact" id="wallpaperMode"><option value="fixed">Fixed</option><option value="shuffle">Shuffle</option></select>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><span class="panel-number">04</span><div><h2>Your quick links</h2><p>Keep up to eight favorite places close.</p></div></div>
+        <div class="links-list" id="linksList"></div>
+        <button class="outline-button" id="addLink" type="button">＋ Add shortcut</button>
+      </section>
+
+      <div class="actions"><button class="reset-button" id="resetButton" type="button">Reset to defaults</button><button class="save-button" type="submit">Save changes <span>↗</span></button></div>
+      <p class="saved-message" id="savedMessage" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

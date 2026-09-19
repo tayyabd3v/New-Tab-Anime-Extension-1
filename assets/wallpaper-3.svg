@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs><linearGradient id="night" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101b3b"/><stop offset=".5" stop-color="#284f76"/><stop offset="1" stop-color="#8e5e9f"/></linearGradient><linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#5d88a9"/><stop offset="1" stop-color="#1c294d"/></linearGradient></defs>
+  <rect width="1600" height="1000" fill="url(#night)"/><circle cx="1180" cy="190" r="94" fill="#e8efff" opacity=".85"/><path d="M0 610q200-130 410 0t410 0 410 0 370 0v390H0Z" fill="url(#water)"/><path d="M0 700q200-95 390 0t430 0 410 0 370 0v300H0Z" fill="#172443" opacity=".92"/>
+  <path d="M0 650 220 450l90 95 140-130 120 210 160-290 150 240 155-180 130 210 160-155 275 300v110H0Z" fill="#0c1832" opacity=".85"/>
+  <g fill="#bce8ff" opacity=".72"><circle cx="160" cy="180" r="3"/><circle cx="350" cy="96" r="2"/><circle cx="680" cy="190" r="4"/><circle cx="850" cy="90" r="2"/><circle cx="1460" cy="270" r="3"/><circle cx="1300" cy="90" r="2"/></g>
+</svg>

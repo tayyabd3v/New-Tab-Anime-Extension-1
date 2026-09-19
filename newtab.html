@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anime New Tab</title>
+  <link rel="stylesheet" href="newtab.css">
+</head>
+<body>
+  <div class="wallpaper" id="wallpaper" aria-hidden="true"></div>
+  <video class="live-wallpaper" id="liveWallpaper" autoplay muted loop playsinline aria-hidden="true"></video>
+  <div class="scrim" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <div class="brand-mark" aria-label="Anime New Tab">
+      <span class="brand-spark">✦</span>
+      <span>Solo Leveling<span class="brand-dot">.</span></span>
+    </div>
+    <div class="topbar-actions">
+        <button class="icon-button" id="refreshWallpaper" type="button" aria-label="Change wallpaper" title="Change wallpaper">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.7-4L3 9m0 0V4m0 5h5M4 13a8 8 0 0 0 14.7 4L21 15m0 0v5m0-5h-5"/></svg>
+        </button>
+        <button class="icon-button" id="settingsButton" type="button" aria-label="Open settings" title="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm8.1-3.5c0-.5-.1-1-.2-1.5l1.7-1.3-1.8-3.1-2 .8a8.1 8.1 0 0 0-2.6-1.5L14.9 3h-3.6l-.3 2.4a8.1 8.1 0 0 0-2.6 1.5l-2-.8-1.8 3.1 1.7 1.3a7.5 7.5 0 0 0 0 3l-1.7 1.3 1.8 3.1 2-.8a8.1 8.1 0 0 0 2.6 1.5l.3 2.4h3.6l.3-2.4a8.1 8.1 0 0 0 2.6-1.5l2 .8 1.8-3.1-1.7-1.3c.1-.5.2-1 .2-1.5Z"/></svg>
+        </button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <section class="hero" aria-label="Dashboard">
+      <p class="eyebrow" id="greeting">Good evening</p>
+      <div class="clock" id="clock">00:00</div>
+      <p class="date" id="date">Friday, September 18, 2026</p>
+      <form class="search-shell" id="searchForm" role="search">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20.5 19.1-4.8-4.8a7 7 0 1 0-1.4 1.4l4.8 4.8 1.4-1.4ZM5 10.5a5.5 5.5 0 1 1 11 0 5.5 5.5 0 0 1-11 0Z"/></svg>
+        <input id="searchInput" type="search" autocomplete="off" placeholder="Search the web..." aria-label="Search the web">
+        <button class="engine-button" id="engineButton" type="button" aria-label="Choose search engine" title="Choose search engine">
+          <span id="engineLabel">Google</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"/></svg>
+        </button>
+        <div class="engine-menu" id="engineMenu" role="menu" hidden></div>
+      </form>
+    </section>
+
+    <section class="shortcuts-section" aria-label="Quick links">
+      <div class="section-heading">
+        <span>Quick links</span>
+        <span class="section-line"></span>
+        <span class="section-count" id="shortcutCount">0 / 8</span>
+      </div>
+      <div class="shortcuts-grid" id="shortcutsGrid"></div>
+    </section>
+    <section class="focus-card" aria-label="Daily focus">
+      <span class="focus-label">DAILY FOCUS</span>
+      <p id="focusQuote">Small steps still move the story forward.</p>
+      <span class="focus-mark">✦</span>
+    </section>
+  </main>
+
+  <script src="newtab.js"></script>
+</body>
+</html>
