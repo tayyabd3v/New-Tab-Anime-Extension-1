@@ -152,6 +152,8 @@ body {
 .visibility-notice[hidden] { display: none; }
 .visibility-notice button { padding: 0; border: 0; color: var(--accent-pink); background: transparent; cursor: pointer; font: inherit; font-weight: 800; }
 .visibility-notice button:hover { color: #fff; }
+.visibility-notice .ignore-notice { color: rgba(255,255,255,.5); font-size: 11px; font-weight: 600; }
+.visibility-notice .ignore-notice:hover { color: #fff; }
 .visibility-notice kbd { padding: 3px 5px; border: 1px solid rgba(255,255,255,.25); border-radius: 5px; color: #fff; background: rgba(255,255,255,.1); font-size: 11px; }
 .focus-card { position: relative; width: min(620px, 100%); margin-top: 26px; padding: 18px 58px 18px 20px; border: 1px solid rgba(255,255,255,.16); border-radius: 16px; background: rgba(20, 14, 48, .25); color: var(--text-secondary); backdrop-filter: blur(10px); animation: fade-in 600ms 280ms ease both; }
 .focus-label { color: var(--accent-pink); font-size: 10px; font-weight: 900; letter-spacing: .18em; }

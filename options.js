@@ -7,6 +7,7 @@ const WALLPAPERS = [
 const DEFAULTS = {
   name: "",
   engine: "google",
+  visibilityNoticeDismissed: false,
   visibility: {
     topbar: true,
     brand: true,

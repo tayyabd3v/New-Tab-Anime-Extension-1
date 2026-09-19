@@ -15,6 +15,7 @@ const ENGINES = {
 const DEFAULTS = {
   name: "",
   engine: "google",
+  visibilityNoticeDismissed: false,
   visibility: {
     topbar: true,
     brand: true,
@@ -144,8 +145,9 @@ function applyVisibility() {
     }
   });
   const hasHiddenItems = Object.values(visibility).some((isVisible) => !isVisible);
-  elements.visibilityNotice.hidden = !hasHiddenItems;
-  elements.visibilityNotice.classList.toggle("is-visible", hasHiddenItems);
+  const showNotice = hasHiddenItems && !settings.visibilityNoticeDismissed;
+  elements.visibilityNotice.hidden = !showNotice;
+  elements.visibilityNotice.classList.toggle("is-visible", showNotice);
 }
 
 function openSettings() {
@@ -279,13 +281,19 @@ async function init() {
     refreshWallpaper: document.querySelector("#refreshWallpaper"),
     focusQuote: document.querySelector("#focusQuote"),
     visibilityNotice: document.querySelector("#visibilityNotice"),
-    openSettingsHint: document.querySelector("#openSettingsHint")
+    openSettingsHint: document.querySelector("#openSettingsHint"),
+    ignoreNotice: document.querySelector("#ignoreNotice")
   });
   settings = { ...DEFAULTS, ...(await storageGet(DEFAULTS)), ...(await localStorageGet({ customWallpapers: [] })) };
   settings.visibility = { ...DEFAULTS.visibility, ...(settings.visibility || {}) };
   applyVisibility();
   elements.settingsButton.addEventListener("click", openSettings);
   elements.openSettingsHint.addEventListener("click", openSettings);
+  elements.ignoreNotice.addEventListener("click", async () => {
+    settings.visibilityNoticeDismissed = true;
+    elements.visibilityNotice.hidden = true;
+    await storageSet({ visibilityNoticeDismissed: true });
+  });
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key.toLowerCase() === "e") {
       event.preventDefault();
