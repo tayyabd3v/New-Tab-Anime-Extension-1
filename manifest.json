@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "An anime-themed new tab dashboard.",
   "chrome_url_overrides": { "newtab": "newtab.html" },
-  "permissions": ["storage", "unlimitedStorage"],
+  "permissions": ["storage", "unlimitedStorage", "tabs"],
   "options_page": "options.html",
   "background": { "service_worker": "background.js" },
   "icons": {

@@ -60,6 +60,23 @@
         <button class="outline-button" id="addLink" type="button">＋ Add shortcut</button>
       </section>
 
+      <section class="panel">
+        <div class="panel-heading"><span class="panel-number">05</span><div><h2>Dashboard visibility</h2><p>Choose exactly what appears on your new tab.</p></div></div>
+        <div class="visibility-grid" id="visibilityGrid">
+          <label class="visibility-option"><input type="checkbox" data-visibility="brand"><span>Brand mark</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="topbar"><span>Top bar</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="controls"><span>Top bar controls</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="greeting"><span>Greeting</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="clock"><span>Clock</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="date"><span>Date</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="search"><span>Search bar</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="shortcuts"><span>Quick links</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="focus"><span>Daily focus</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="status"><span>Status rail</span></label>
+          <label class="visibility-option"><input type="checkbox" data-visibility="particles"><span>Floating particles</span></label>
+        </div>
+      </section>
+
       <div class="actions"><button class="reset-button" id="resetButton" type="button">Reset to defaults</button><button class="save-button" type="submit">Save changes <span>↗</span></button></div>
       <p class="saved-message" id="savedMessage" role="status" aria-live="polite"></p>
     </form>

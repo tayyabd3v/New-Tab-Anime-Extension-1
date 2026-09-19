@@ -70,4 +70,8 @@ select.text-input { cursor: pointer; }
 .save-button:hover { transform: translateY(-2px); }
 .save-button span { margin-left: 8px; font-size: 16px; }
 .saved-message { min-height: 20px; margin: 14px 0 0; color: var(--accent-pink); font-size: 13px; text-align: right; }
+.visibility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.visibility-option { display: flex; min-height: 46px; padding: 0 13px; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); cursor: pointer; font-size: 13px; transition: border-color 200ms ease, background 200ms ease; }
+.visibility-option:hover { border-color: var(--accent-pink); background: rgba(255,126,179,.1); }
+.visibility-option input { width: 16px; height: 16px; accent-color: var(--accent-pink); }
 @media (max-width: 600px) { .settings-page { width: min(100% - 24px, 520px); padding-top: 30px; } .page-header { display: block; } .back-link { display: inline-block; margin-top: 22px; } .panel { padding: 20px; } .wallpaper-grid, .custom-wallpapers { grid-template-columns: 1fr; } .wallpaper-choice { height: 100px; } .mode-row, .link-row { grid-template-columns: 1fr; } .remove-link { min-height: 40px; } .actions { align-items: stretch; flex-direction: column-reverse; } }

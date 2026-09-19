@@ -15,6 +15,19 @@ const ENGINES = {
 const DEFAULTS = {
   name: "",
   engine: "google",
+  visibility: {
+    topbar: true,
+    brand: true,
+    controls: true,
+    greeting: true,
+    clock: true,
+    date: true,
+    search: true,
+    shortcuts: true,
+    focus: true,
+    status: true,
+    particles: true
+  },
   wallpaper: 0,
   wallpaperMode: "shuffle",
   shortcuts: [
@@ -89,7 +102,7 @@ function refreshWallpaper() {
 
 function updateClock() {
   const now = new Date();
-  elements.clock.textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
+  elements.clock.textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
   elements.date.textContent = now.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric", year: "numeric" });
   const hour = now.getHours();
   const period = hour < 5 ? "Good night" : hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : hour < 21 ? "Good evening" : "Good night";
@@ -98,6 +111,35 @@ function updateClock() {
 
 function getInitials(label) {
   return label.trim().split(/\s+/).slice(0, 2).map((part) => part[0]).join("").toUpperCase() || "✦";
+}
+
+function getFaviconUrl(url) {
+  try {
+    return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(new URL(url).hostname)}&sz=64`;
+  } catch {
+    return "";
+  }
+}
+
+function applyVisibility() {
+  const visibility = { ...DEFAULTS.visibility, ...(settings.visibility || {}) };
+  const selectors = {
+    topbar: ".topbar",
+    brand: ".brand-mark",
+    controls: ".topbar-actions",
+    greeting: "#greeting",
+    clock: "#clock",
+    date: "#date",
+    search: ".search-shell",
+    shortcuts: ".shortcuts-section",
+    focus: ".focus-card",
+    status: ".dashboard-rail",
+    particles: "#particles"
+  };
+  Object.entries(selectors).forEach(([key, selector]) => {
+    const element = document.querySelector(selector);
+    if (element) element.hidden = !visibility[key];
+  });
 }
 
 function renderShortcuts() {
@@ -119,6 +161,12 @@ function renderShortcuts() {
     const icon = document.createElement("span");
     icon.className = "shortcut-icon";
     icon.textContent = getInitials(shortcut.label);
+    const favicon = document.createElement("img");
+    favicon.className = "shortcut-favicon";
+    favicon.alt = "";
+    favicon.src = getFaviconUrl(shortcut.url);
+    favicon.addEventListener("error", () => favicon.remove(), { once: true });
+    favicon.addEventListener("load", () => icon.replaceChildren(favicon), { once: true });
     const label = document.createElement("span");
     label.className = "shortcut-label";
     label.textContent = shortcut.label;
@@ -222,6 +270,8 @@ async function init() {
     focusQuote: document.querySelector("#focusQuote")
   });
   settings = { ...DEFAULTS, ...(await storageGet(DEFAULTS)), ...(await localStorageGet({ customWallpapers: [] })) };
+  settings.visibility = { ...DEFAULTS.visibility, ...(settings.visibility || {}) };
+  applyVisibility();
   elements.settingsButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
   elements.refreshWallpaper.addEventListener("click", refreshWallpaper);
   elements.focusQuote.textContent = FOCUS_LINES[new Date().getDate() % FOCUS_LINES.length];

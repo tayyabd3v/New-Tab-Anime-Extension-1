@@ -7,6 +7,19 @@ const WALLPAPERS = [
 const DEFAULTS = {
   name: "",
   engine: "google",
+  visibility: {
+    topbar: true,
+    brand: true,
+    controls: true,
+    greeting: true,
+    clock: true,
+    date: true,
+    search: true,
+    shortcuts: true,
+    focus: true,
+    status: true,
+    particles: true
+  },
   wallpaper: 0,
   wallpaperMode: "shuffle",
   shortcuts: [
@@ -195,6 +208,7 @@ function resetDefaults() {
   elements.name.value = settings.name;
   elements.engine.value = settings.engine;
   elements.wallpaperMode.value = settings.wallpaperMode;
+  setVisibilityInputs();
   renderWallpapers();
   settings.customWallpapers = [];
   localStorageSet({ customWallpapers: [] });
@@ -203,6 +217,21 @@ function resetDefaults() {
   loadBackgroundMedia();
   renderLinks();
   saveSettings();
+}
+
+function setVisibilityInputs() {
+  const visibility = { ...DEFAULTS.visibility, ...(settings.visibility || {}) };
+  document.querySelectorAll("[data-visibility]").forEach((input) => {
+    input.checked = visibility[input.dataset.visibility] !== false;
+  });
+}
+
+function readVisibilityInputs() {
+  const visibility = {};
+  document.querySelectorAll("[data-visibility]").forEach((input) => {
+    visibility[input.dataset.visibility] = input.checked;
+  });
+  return visibility;
 }
 
 async function init() {
@@ -223,15 +252,18 @@ async function init() {
     savedMessage: document.querySelector("#savedMessage")
   });
   settings = { ...DEFAULTS, ...(await storageGet(DEFAULTS)), ...(await localStorageGet({ customWallpapers: [] })) };
+  settings.visibility = { ...DEFAULTS.visibility, ...(settings.visibility || {}) };
   settings.shortcuts = Array.isArray(settings.shortcuts) ? settings.shortcuts : [];
   settings.customWallpapers = Array.isArray(settings.customWallpapers) ? settings.customWallpapers : [];
   elements.name.value = settings.name || "";
   elements.engine.value = settings.engine || DEFAULTS.engine;
   elements.wallpaperMode.value = settings.wallpaperMode || DEFAULTS.wallpaperMode;
+  setVisibilityInputs();
   renderWallpapers();
   renderCustomWallpapers();
   renderLinks();
-  elements.form.addEventListener("submit", (event) => { event.preventDefault(); saveSettings(); });
+  elements.form.addEventListener("submit", (event) => { event.preventDefault(); settings.visibility = readVisibilityInputs(); saveSettings(); });
+  document.querySelectorAll("[data-visibility]").forEach((input) => input.addEventListener("change", () => { settings.visibility = readVisibilityInputs(); saveSettings(false); }));
   elements.addLink.addEventListener("click", () => {
     if (settings.shortcuts.length >= 8) return;
     settings.shortcuts.push({ label: "", url: "https://" });
@@ -261,8 +293,9 @@ async function init() {
   });
   elements.resetButton.addEventListener("click", resetDefaults);
   elements.closeSettings.addEventListener("click", () => {
-    window.close();
-    window.setTimeout(() => window.history.back(), 120);
+    chrome.runtime.sendMessage({ action: "closeOptions" }, () => {
+      if (chrome.runtime.lastError) window.close();
+    });
   });
   elements.engine.addEventListener("change", () => saveSettings(false));
   elements.wallpaperMode.addEventListener("change", () => saveSettings(false));

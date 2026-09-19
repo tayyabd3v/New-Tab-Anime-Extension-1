@@ -18,3 +18,9 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set(settings);
   });
 });
+
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message.action === "closeOptions" && sender.tab?.id !== undefined) {
+    chrome.tabs.remove(sender.tab.id);
+  }
+});
