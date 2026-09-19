@@ -138,8 +138,18 @@ function applyVisibility() {
   };
   Object.entries(selectors).forEach(([key, selector]) => {
     const element = document.querySelector(selector);
-    if (element) element.hidden = !visibility[key];
+    if (element) {
+      element.hidden = !visibility[key];
+      element.classList.toggle("is-hidden", !visibility[key]);
+    }
   });
+  const hasHiddenItems = Object.values(visibility).some((isVisible) => !isVisible);
+  elements.visibilityNotice.hidden = !hasHiddenItems;
+  elements.visibilityNotice.classList.toggle("is-visible", hasHiddenItems);
+}
+
+function openSettings() {
+  chrome.runtime.openOptionsPage();
 }
 
 function renderShortcuts() {
@@ -267,12 +277,21 @@ async function init() {
     shortcutCount: document.querySelector("#shortcutCount"),
     settingsButton: document.querySelector("#settingsButton"),
     refreshWallpaper: document.querySelector("#refreshWallpaper"),
-    focusQuote: document.querySelector("#focusQuote")
+    focusQuote: document.querySelector("#focusQuote"),
+    visibilityNotice: document.querySelector("#visibilityNotice"),
+    openSettingsHint: document.querySelector("#openSettingsHint")
   });
   settings = { ...DEFAULTS, ...(await storageGet(DEFAULTS)), ...(await localStorageGet({ customWallpapers: [] })) };
   settings.visibility = { ...DEFAULTS.visibility, ...(settings.visibility || {}) };
   applyVisibility();
-  elements.settingsButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
+  elements.settingsButton.addEventListener("click", openSettings);
+  elements.openSettingsHint.addEventListener("click", openSettings);
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.key.toLowerCase() === "e") {
+      event.preventDefault();
+      openSettings();
+    }
+  });
   elements.refreshWallpaper.addEventListener("click", refreshWallpaper);
   elements.focusQuote.textContent = FOCUS_LINES[new Date().getDate() % FOCUS_LINES.length];
   loadWallpaper();
